@@ -17,8 +17,7 @@ userRouter.get('/', getUsers );
 
 // Crear Usuarios
 userRouter.post('/',
-    [   
-        jwtValidator,   
+    [  
         check('name',    'The name is Required').isString().notEmpty(),
         check('email',   'The email is Required').isEmail(),
         check('password','The password is Required').isString().notEmpty(),

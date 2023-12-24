@@ -41,8 +41,9 @@ const uploadImage = async(req, res = response) => {
         });
 
         return res.status(200).json({
-            ok  : true,
-            msj : 'Imagen subida correctamente!'
+            ok        : true,
+            msj       : 'Imagen subida correctamente!',
+            imageName : uuidImage
         });
         
     } catch (error) {

@@ -1,6 +1,7 @@
 const { response } = require("express");
 const UserSchema   = require("../models/user.model");
 const bcrypt       = require('bcrypt');
+const { jwtGenerator } = require("../helpers/jwt-generator");
 
 const getUsers = async(req, res = response) => {
     try {
@@ -42,11 +43,16 @@ const createUser = async(req, res = response) => {
         // Asignamos la contraseña hasheada
         user.password = hashedPassword;
         await user.save();
-        
+
+        // Generamos el token de acceso
+        const uid = req.uid;
+        const token = await jwtGenerator(uid);
+
         return res.status(201).json({
             ok  : true,
             msj : 'Usuario creado con éxito!',
             user,
+            token,
             creator : req.uid
         });
     } catch (error) {

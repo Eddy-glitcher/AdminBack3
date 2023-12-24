@@ -63,7 +63,7 @@ const logInWhitGoogle = async(req, res = response) => {
                 google : true
             });
         }else{
-            user = userDb;
+            user = userDb; 
             user.google = true;
         };
 
